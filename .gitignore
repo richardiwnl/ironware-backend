@@ -5,3 +5,4 @@ package-lock.json
 .eslintrc.js
 .prettierrc
 .editorconfig
+**sequelizeMeta.json
