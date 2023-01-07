@@ -4,6 +4,13 @@ export default class Endereco extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          field: 'cd_endereco',
+        },
         logradouro: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -70,10 +77,18 @@ export default class Endereco extends Model {
             },
           },
         },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
       {
         sequelize,
-        tableName: 'enderecos',
+        tableName: 'tb_enderecos',
       }
     );
 
@@ -81,8 +96,8 @@ export default class Endereco extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Usuario, { foreignKey: 'id_endereco' });
-    this.hasOne(models.Fornecedor, { foreignKey: 'id_endereco' });
-    this.hasOne(models.AuxiliarAdm, { foreignKey: 'id_endereco' });
+    this.hasOne(models.Usuario, { foreignKey: 'cd_endereco' });
+    this.hasOne(models.Fornecedor, { foreignKey: 'cd_endereco' });
+    this.hasOne(models.AuxiliarAdm, { foreignKey: 'cd_endereco' });
   }
 }

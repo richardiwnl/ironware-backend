@@ -5,6 +5,21 @@ export default class AuxiliarAdm extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          field: 'cd_auxiliar',
+        },
+        id_endereco: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'tb_enderecos',
+            key: 'cd_endereco',
+          },
+          field: 'cd_endereco',
+        },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -77,8 +92,16 @@ export default class AuxiliarAdm extends Model {
           type: Sequelize.STRING,
           defaultValue: '',
         },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
-      { sequelize, tableName: 'auxiliares_administrativos' }
+      { sequelize, tableName: 'tb_auxiliares_administrativos' }
     );
 
     this.addHook('beforeSave', async (user) => {
@@ -89,7 +112,7 @@ export default class AuxiliarAdm extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Encomenda, { foreignKey: 'id_auxiliar_adm' });
+    this.hasMany(models.Encomenda, { foreignKey: 'cd_auxiliar' });
     this.belongsTo(models.Endereco);
   }
 }

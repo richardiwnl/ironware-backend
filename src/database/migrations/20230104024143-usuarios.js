@@ -24,16 +24,19 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         field: 'ds_email',
       },
       telefone: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         field: 'nu_fone',
       },
       cpf: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         field: 'nu_cpf',
       },
       data_nasc: {
@@ -45,6 +48,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         field: 'ds_senha',
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },

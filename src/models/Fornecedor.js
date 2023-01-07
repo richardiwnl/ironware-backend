@@ -4,6 +4,13 @@ export default class Fornecedor extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          field: 'cd_fornecedor',
+        },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -52,15 +59,23 @@ export default class Fornecedor extends Model {
             },
           },
         },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
-      { sequelize, tableName: 'fornecedores' }
+      { sequelize, tableName: 'tb_fornecedores' }
     );
 
     return this;
   }
 
   static associate(models) {
-    this.hasMany(models.Encomenda, { foreignKey: 'id_fornecedor' });
+    this.hasMany(models.Encomenda, { foreignKey: 'cd_fornecedor' });
 
     this.belongsTo(models.Endereco);
   }

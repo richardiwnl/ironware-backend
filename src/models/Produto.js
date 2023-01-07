@@ -7,6 +7,13 @@ export default class Produto extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          field: 'cd_produto',
+        },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -44,8 +51,16 @@ export default class Produto extends Model {
           type: Sequelize.DECIMAL(10, 2),
           defaultValue: 0,
         },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
-      { sequelize, tableName: 'produtos' }
+      { sequelize, tableName: 'tb_produtos' }
     );
 
     return this;
@@ -53,14 +68,14 @@ export default class Produto extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Compra, {
-      foreignKey: 'id_produto',
-      otherKey: 'id_compra',
+      foreignKey: 'cd_produto',
+      otherKey: 'cd_compra',
       through: ProdutoCompra,
     });
 
     this.belongsToMany(models.Encomenda, {
-      foreignKey: 'id_produto',
-      otherKey: 'id_encomenda',
+      foreignKey: 'cd_produto',
+      otherKey: 'cd_encomenda',
       through: ProdutoEncomenda,
     });
   }

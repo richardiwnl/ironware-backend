@@ -5,9 +5,17 @@ export default class Usuario extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
+          field: 'cd_usuario',
+        },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
+          field: 'nm_nome',
           validate: {
             len: {
               args: [3, 255],
@@ -17,6 +25,7 @@ export default class Usuario extends Model {
         },
         email: {
           type: Sequelize.STRING,
+          field: 'ds_email',
           defaultValue: '',
           unique: {
             msg: 'E-mail já cadastrado',
@@ -30,12 +39,13 @@ export default class Usuario extends Model {
         telefone: {
           type: Sequelize.STRING,
           defaultValue: '',
+          field: 'nu_fone',
           unique: {
             msg: 'Número de telefone já cadastrado',
           },
           validate: {
             isNumeric: {
-              msg: 'Número inválido',
+              msg: 'Número de telefone inválido',
             },
             len: {
               args: [8, 11],
@@ -46,6 +56,7 @@ export default class Usuario extends Model {
         cpf: {
           type: Sequelize.STRING,
           defaultValue: '',
+          field: 'nu_cpf',
           unique: {
             msg: 'CPF já cadastrado',
           },
@@ -58,7 +69,8 @@ export default class Usuario extends Model {
         },
         dataNasc: {
           type: Sequelize.DATE,
-          defaultValue: '',
+          defaultValue: Date.now(),
+          field: 'dt_nascimento',
           validate: {
             customValidator(value) {
               if (new Date(value) < new Date(1900)) {
@@ -80,12 +92,23 @@ export default class Usuario extends Model {
         hash_senha: {
           type: Sequelize.STRING,
           defaultValue: '',
+          field: 'ds_senha',
+        },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
         },
       },
-      { sequelize, tableName: 'usuarios' }
+      { sequelize, tableName: 'tb_usuarios' }
     );
 
     this.addHook('beforeSave', async (user) => {
+      if (!user.senha) return;
+
       user.hash_senha = await bcryptjs.hash(user.senha, 8);
     });
 
@@ -93,7 +116,7 @@ export default class Usuario extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Compra, { foreignKey: 'id_usuario', });
+    this.hasMany(models.Compra, { foreignKey: 'cd_usuario' });
     this.belongsTo(models.Endereco);
   }
 }

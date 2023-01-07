@@ -6,6 +6,7 @@ import Compra from '../models/Compra';
 import Usuario from '../models/Usuario';
 import Produto from '../models/Produto';
 import ProdutoCompra from '../models/ProdutoCompra';
+import ProdutoEncomenda from '../models/ProdutoEncomenda';
 import Encomenda from '../models/Encomenda';
 import AuxiliarAdm from '../models/AuxiliarAdm';
 import Fornecedor from '../models/Fornecedor';
@@ -19,6 +20,7 @@ const models = [
   Encomenda,
   AuxiliarAdm,
   Fornecedor,
+  ProdutoEncomenda,
 ];
 
 const connection = new Sequelize(databaseConfig);

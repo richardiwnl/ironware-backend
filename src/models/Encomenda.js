@@ -1,9 +1,34 @@
 import Sequelize, { Model } from 'sequelize';
 
+import ProdutoEncomenda from '../models/ProdutoEncomenda'
+
 export default class Encomenda extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          field: 'cd_encomenda',
+        },
+        id_fornecedor: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'tb_fornecedores',
+            key: 'cd_fornecedor',
+          },
+          field: 'cd_fornecedor',
+        },
+        id_auxiliar_adm: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'tb_auxiliares_administrativos',
+            key: 'cd_auxiliar',
+          },
+          field: 'cd_auxiliar',
+        },
         valor_total: {
           type: Sequelize.DECIMAL(10, 2),
           defaultValue: '',
@@ -39,8 +64,16 @@ export default class Encomenda extends Model {
             },
           },
         },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
-      { sequelize, tableName: 'encomendas' }
+      { sequelize, tableName: 'tb_encomendas' }
     );
 
     return this;
@@ -48,8 +81,8 @@ export default class Encomenda extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Produto, {
-      foreignKey: 'id_encomenda',
-      otherKey: 'id_produto',
+      foreignKey: 'cd_encomenda',
+      otherKey: 'cd_produto',
       through: ProdutoEncomenda,
     });
 

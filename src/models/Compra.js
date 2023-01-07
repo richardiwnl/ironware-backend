@@ -6,9 +6,25 @@ export default class Compra extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          allowNull: false,
+          field: 'cd_compra',
+        },
+        id_usuario: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'tb_usuarios',
+            key: 'cd_usuario',
+          },
+          field: 'cd_usuario',
+        },
         data_compra: {
           type: Sequelize.DATE,
-          defaultValue: '',
+          defaultValue: Date.now(),
         },
         forma_pagamento: {
           type: Sequelize.ENUM('CARTÃO DE CRÉDITO', 'CARTÃO DE DÉBITO'),
@@ -22,10 +38,18 @@ export default class Compra extends Model {
           type: Sequelize.DECIMAL(10, 2),
           defaultValue: 0,
         },
+        created_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updated_at: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       },
       {
         sequelize,
-        tableName: 'compras',
+        tableName: 'tb_compras',
       }
     );
 
@@ -34,8 +58,8 @@ export default class Compra extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Produto, {
-      foreignKey: 'id_compra',
-      otherKey: 'id_produto',
+      foreignKey: 'cd_compra',
+      otherKey: 'cd_produto',
       through: ProdutoCompra,
     });
 

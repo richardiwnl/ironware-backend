@@ -28,6 +28,14 @@ module.exports = {
         allowNull: false,
         field: 'vl_valor',
       },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     });
   },
 
