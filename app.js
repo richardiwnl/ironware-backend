@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import test from './src/routes/test';
+import Usuario from './src/routes/Usuario';
+
+import './src/database';
 
 class App {
   constructor() {
@@ -24,6 +27,7 @@ class App {
 
   routes() {
     this.app.use('/', test);
+    this.app.use('/usuarios/', Usuario);
   }
 }
 

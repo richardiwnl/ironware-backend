@@ -12,14 +12,14 @@ import AuxiliarAdm from '../models/AuxiliarAdm';
 import Fornecedor from '../models/Fornecedor';
 
 const models = [
-  Usuario,
   Endereco,
+  Usuario,
   Compra,
   Produto,
   ProdutoCompra,
-  Encomenda,
-  AuxiliarAdm,
   Fornecedor,
+  AuxiliarAdm,
+  Encomenda,
   ProdutoEncomenda,
 ];
 

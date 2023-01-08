@@ -6,7 +6,6 @@ export default class Endereco extends Model {
       {
         id: {
           type: Sequelize.INTEGER,
-          allowNull: false,
           autoIncrement: true,
           primaryKey: true,
           field: 'cd_endereco',
@@ -20,6 +19,7 @@ export default class Endereco extends Model {
               msg: 'O logradouro deve ter entre 3 e 255 caracteres',
             },
           },
+          field: 'nm_logradouro',
         },
         bairro: {
           type: Sequelize.STRING,
@@ -30,6 +30,7 @@ export default class Endereco extends Model {
               msg: 'O bairro deve ter entre 3 e 255 caracteres',
             },
           },
+          field: 'nm_bairro',
         },
         cidade: {
           type: Sequelize.STRING,
@@ -40,6 +41,7 @@ export default class Endereco extends Model {
               msg: 'A cidade deve ter entre 3 e 255 caracteres',
             },
           },
+          field: 'nm_cidade',
         },
         complemento: {
           type: Sequelize.STRING,
@@ -50,6 +52,7 @@ export default class Endereco extends Model {
               msg: 'O complemento deve ter entre 3 e 255 caracteres',
             },
           },
+          field: 'ds_complemento',
         },
         numero: {
           type: Sequelize.STRING,
@@ -63,6 +66,7 @@ export default class Endereco extends Model {
               msg: 'O número deve ter entre 1 e 5 dígitos',
             },
           },
+          field: 'nu_numero',
         },
         cep: {
           type: Sequelize.STRING,
@@ -76,6 +80,7 @@ export default class Endereco extends Model {
               msg: 'O CEP deve ter 8 dígitos',
             },
           },
+          field: 'nu_cep',
         },
         created_at: {
           type: Sequelize.DATE,

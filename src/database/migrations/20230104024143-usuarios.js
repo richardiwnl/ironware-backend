@@ -10,11 +10,14 @@ module.exports = {
       },
       id_endereco: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'tb_enderecos',
           key: 'cd_endereco',
         },
         field: 'cd_endereco',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       nome: {
         type: Sequelize.STRING,
@@ -40,7 +43,7 @@ module.exports = {
         field: 'nu_cpf',
       },
       data_nasc: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
         field: 'dt_nascimento',
       },

@@ -7,25 +7,34 @@ export default class Usuario extends Model {
       {
         id: {
           type: Sequelize.INTEGER,
-          primaryKey: true,
           autoIncrement: true,
-          allowNull: false,
+          primaryKey: true,
           field: 'cd_usuario',
+        },
+        id_endereco: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'tb_enderecos',
+            key: 'cd_endereco',
+          },
+          field: 'cd_endereco',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE',
         },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
-          field: 'nm_nome',
           validate: {
             len: {
               args: [3, 255],
               msg: 'O nome precisa ter entre 3 e 255 caracteres',
             },
           },
+          field: 'nm_nome',
         },
         email: {
           type: Sequelize.STRING,
-          field: 'ds_email',
           defaultValue: '',
           unique: {
             msg: 'E-mail já cadastrado',
@@ -35,11 +44,11 @@ export default class Usuario extends Model {
               msg: 'E-mail inválido',
             },
           },
+          field: 'ds_email',
         },
         telefone: {
           type: Sequelize.STRING,
           defaultValue: '',
-          field: 'nu_fone',
           unique: {
             msg: 'Número de telefone já cadastrado',
           },
@@ -52,11 +61,11 @@ export default class Usuario extends Model {
               msg: 'O número de telefone deve entre 8 e 11 dígitos',
             },
           },
+          field: 'nu_fone',
         },
         cpf: {
           type: Sequelize.STRING,
           defaultValue: '',
-          field: 'nu_cpf',
           unique: {
             msg: 'CPF já cadastrado',
           },
@@ -66,11 +75,11 @@ export default class Usuario extends Model {
               msg: 'O CPF deve ter 11 dígitos',
             },
           },
+          field: 'nu_cpf',
         },
-        dataNasc: {
-          type: Sequelize.DATE,
+        data_nasc: {
+          type: Sequelize.DATEONLY,
           defaultValue: Date.now(),
-          field: 'dt_nascimento',
           validate: {
             customValidator(value) {
               if (new Date(value) < new Date(1900)) {
@@ -78,6 +87,7 @@ export default class Usuario extends Model {
               }
             },
           },
+          field: 'dt_nascimento',
         },
         senha: {
           type: Sequelize.VIRTUAL,
@@ -117,6 +127,6 @@ export default class Usuario extends Model {
 
   static associate(models) {
     this.hasMany(models.Compra, { foreignKey: 'cd_usuario' });
-    this.belongsTo(models.Endereco);
+    this.belongsTo(models.Endereco, { foreignKey: 'cd_endereco' });
   }
 }
