@@ -19,8 +19,6 @@ export default class Usuario extends Model {
             key: 'cd_endereco',
           },
           field: 'cd_endereco',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE',
         },
         nome: {
           type: Sequelize.STRING,
