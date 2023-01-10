@@ -10,6 +10,7 @@ module.exports = {
       },
       id_endereco: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'tb_enderecos',
           key: 'cd_endereco',

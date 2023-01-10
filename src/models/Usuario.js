@@ -80,7 +80,7 @@ export default class Usuario extends Model {
           defaultValue: Date.now(),
           validate: {
             customValidator(value) {
-              if (new Date(value) < new Date(1900)) {
+              if (new Date(value) < new Date(1900) || new Date(value) >= Date.now()) {
                 throw new Error('Data inválida');
               }
             },

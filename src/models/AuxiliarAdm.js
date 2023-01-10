@@ -29,6 +29,7 @@ export default class AuxiliarAdm extends Model {
               msg: 'O nome deve ter entre 3 e 255 caracteres',
             },
           },
+          field: 'nm_nome',
         },
         email: {
           type: Sequelize.STRING,
@@ -41,16 +42,19 @@ export default class AuxiliarAdm extends Model {
               msg: 'E-mail inválido',
             },
           },
+          field: 'ds_email',
         },
         data_nasc: {
-          type: Sequelize.DATE,
+          type: Sequelize.DATEONLY,
+          defaultValue: Date.now(),
           validate: {
             customValidator(value) {
-              if (new Date(value) >= Date.now()) {
-                return 'Data inválida';
+              if (new Date(value) < new Date(1900) || new Date(value) >= Date.now()) {
+                throw new Error('Data inválida');
               }
             },
           },
+          field: 'dt_nascimento',
         },
         cpf: {
           type: Sequelize.STRING,
@@ -61,6 +65,7 @@ export default class AuxiliarAdm extends Model {
               msg: 'O CPF deve ter 11 dígitos',
             },
           },
+          field: 'nu_cpf',
         },
         telefone: {
           type: Sequelize.STRING,
@@ -70,13 +75,14 @@ export default class AuxiliarAdm extends Model {
           },
           validate: {
             isNumeric: {
-              msg: 'Número inválido',
+              msg: 'Número de telefone inválido',
             },
             len: {
               args: [8, 11],
               msg: 'O número de telefone deve entre 8 e 11 dígitos',
             },
           },
+          field: 'nu_fone',
         },
         senha: {
           type: Sequelize.VIRTUAL,
@@ -91,6 +97,7 @@ export default class AuxiliarAdm extends Model {
         hash_senha: {
           type: Sequelize.STRING,
           defaultValue: '',
+          field: 'ds_senha',
         },
         created_at: {
           type: Sequelize.DATE,
@@ -105,6 +112,8 @@ export default class AuxiliarAdm extends Model {
     );
 
     this.addHook('beforeSave', async (user) => {
+      if (!user.senha) return;
+
       user.hash_senha = await bcryptjs.hash(user.senha, 8);
     });
 
@@ -113,6 +122,6 @@ export default class AuxiliarAdm extends Model {
 
   static associate(models) {
     this.hasMany(models.Encomenda, { foreignKey: 'cd_auxiliar' });
-    this.belongsTo(models.Endereco);
+    this.belongsTo(models.Endereco, { foreignKey: 'cd_endereco' });
   }
 }
