@@ -125,6 +125,10 @@ export default class Usuario extends Model {
     return this;
   }
 
+  passwordIsValid(password) {
+    return bcryptjs.compare(password, this.hash_senha);
+  }
+
   static associate(models) {
     this.hasMany(models.Compra, { foreignKey: 'cd_usuario' });
     this.belongsTo(models.Endereco, { foreignKey: 'cd_endereco' });

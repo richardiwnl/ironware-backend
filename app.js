@@ -5,6 +5,7 @@ dotenv.config();
 
 import test from './src/routes/test';
 import Usuario from './src/routes/Usuario';
+import Token from './src/routes/Token';
 
 import './src/database';
 
@@ -28,6 +29,7 @@ class App {
   routes() {
     this.app.use('/', test);
     this.app.use('/usuarios/', Usuario);
+    this.app.use('/tokens/', Token);
   }
 }
 
