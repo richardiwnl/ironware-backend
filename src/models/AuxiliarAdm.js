@@ -120,6 +120,10 @@ export default class AuxiliarAdm extends Model {
     return this;
   }
 
+  passwordIsValid(password) {
+    return bcryptjs.compare(password, this.hash_senha);
+  }
+
   static associate(models) {
     this.hasMany(models.Encomenda, { foreignKey: 'cd_auxiliar' });
     this.belongsTo(models.Endereco, { foreignKey: 'cd_endereco' });

@@ -1,6 +1,6 @@
 import jwt, { JsonWebTokenError } from 'jsonwebtoken';
 
-import Usuario from '../models/Usuario';
+import AuxiliarAdm from '../models/AuxiliarAdm';
 
 // AVISO!!! Código de baixíssima qualidade a seguir:
 export default async function (req, res, next) {
@@ -19,25 +19,25 @@ export default async function (req, res, next) {
   const [, token] = authorization.split(' ');
 
   try {
-    const dados = jwt.verify(token, process.env.TOKEN_SECRET);
+    const dados = jwt.verify(token, process.env.AUX_TOKEN_SECRET);
     const { id, email } = dados;
 
-    const usuario = await Usuario.findOne({
+    const auxiliar = await AuxiliarAdm.findOne({
       where: {
         id,
         email,
       },
     });
 
-    if (!usuario) {
+    if (!auxiliar) {
       return res.status(401).json({
-        errors: ['Usuário não existe'],
+        errors: ['Auxiliar não existe'],
       });
     }
 
     req.userId = id;
     req.userEmail = email;
-    req.user = Usuario;
+    req.user = AuxiliarAdm;
 
     next();
   } catch (err) {
@@ -47,7 +47,6 @@ export default async function (req, res, next) {
       return next();
     }
 
-    console.log(err);
     return res.status(401).json({
       errors: ['Token expirado ou inválido'],
     });

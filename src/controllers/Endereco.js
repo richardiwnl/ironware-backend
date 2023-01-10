@@ -7,7 +7,7 @@ class EnderecoController {
       const endereco = await Endereco.create(req.body);
       const { logradouro, bairro, cidade, complemento, numero, cep } = endereco;
 
-      const usuario = await Usuario.findByPk(req.userId);
+      const usuario = await req.user.findByPk(req.userId);
 
       usuario.id_endereco = endereco.id;
 
@@ -23,7 +23,7 @@ class EnderecoController {
 
   async show(req, res) {
     try {
-      const usuario = await Usuario.findByPk(req.userId);
+      const usuario = await req.user.findByPk(req.userId);
       const endereco = await Endereco.findByPk(usuario.id_endereco);
 
       if (!endereco) {
@@ -44,7 +44,7 @@ class EnderecoController {
 
   async update(req, res) {
     try {
-      const usuario = await Usuario.findByPk(req.userId);
+      const usuario = await req.user.findByPk(req.userId);
       const endereco = await Endereco.findByPk(usuario.id_endereco);
 
       if (!endereco) {
@@ -68,7 +68,7 @@ class EnderecoController {
   // TODO: Código não testado devido ao RESTRICT do banco de dados.
   /*
     Um usuário devia apagar ou atualizar seu endereço?
-    
+
     async delete(req, res) {
     try {
       const usuario = await Usuario.findByPk(req.userId);
