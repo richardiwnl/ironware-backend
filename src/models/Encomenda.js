@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-import ProdutoEncomenda from '../models/ProdutoEncomenda'
+import ProdutoEncomenda from '../models/ProdutoEncomenda';
 
 export default class Encomenda extends Model {
   static init(sequelize) {
@@ -20,6 +20,9 @@ export default class Encomenda extends Model {
             key: 'cd_fornecedor',
           },
           field: 'cd_fornecedor',
+          allowNull: false,
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
         },
         id_auxiliar_adm: {
           type: Sequelize.INTEGER,
@@ -28,6 +31,9 @@ export default class Encomenda extends Model {
             key: 'cd_auxiliar',
           },
           field: 'cd_auxiliar',
+          allowNull: false,
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
         },
         valor_total: {
           type: Sequelize.DECIMAL(10, 2),
@@ -40,18 +46,13 @@ export default class Encomenda extends Model {
               args: [0],
               msg: 'O valor deve ser maior que 0',
             },
-            validate: {
-              customValidator(value) {
-                if (new Date(value) > Date.now()) {
-                  return 'Data inválida';
-                }
-              },
-            },
           },
+          field: 'vl_preco_total',
         },
         data_entrega: {
           type: Sequelize.DATE,
           defaultValue: Date.now(),
+          field: 'dt_entrega',
         },
         data_realizacao: {
           type: Sequelize.DATE,
@@ -59,10 +60,11 @@ export default class Encomenda extends Model {
           validate: {
             customValidator(value) {
               if (new Date(value) > Date.now()) {
-                return 'Data inválida';
+                throw new Error('Data inválida');
               }
             },
           },
+          field: 'dt_realizacao',
         },
         created_at: {
           type: Sequelize.DATE,
@@ -86,7 +88,7 @@ export default class Encomenda extends Model {
       through: ProdutoEncomenda,
     });
 
-    this.belongsTo(models.Fornecedor);
-    this.belongsTo(models.AuxiliarAdm);
+    this.belongsTo(models.Fornecedor, { foreignKey: 'cd_fornecedor' });
+    this.belongsTo(models.AuxiliarAdm, { foreignKey: 'cd_auxiliar' });
   }
 }

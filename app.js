@@ -10,6 +10,7 @@ import AuxToken from './src/routes/AuxToken';
 import Endereco from './src/routes/Endereco';
 import AuxiliarAdm from './src/routes/AuxiliarAdm';
 import Fornecedor from './src/routes/Fornecedor';
+import Encomenda from './src/routes/Encomenda';
 
 import './src/database';
 
@@ -38,6 +39,7 @@ class App {
     this.app.use('/enderecos/', Endereco);
     this.app.use('/auxiliares/', AuxiliarAdm);
     this.app.use('/fornecedores/', Fornecedor);
+    this.app.use('/encomendas/', Encomenda);
   }
 }
 

@@ -15,6 +15,8 @@ module.exports = {
           key: 'cd_fornecedor',
         },
         field: 'cd_fornecedor',
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       id_auxiliar_adm: {
         type: Sequelize.INTEGER,
@@ -23,6 +25,8 @@ module.exports = {
           key: 'cd_auxiliar',
         },
         field: 'cd_auxiliar',
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       preco_total: {
         type: Sequelize.DECIMAL(10, 2),
