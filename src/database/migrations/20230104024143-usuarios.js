@@ -16,6 +16,8 @@ module.exports = {
           key: 'cd_endereco',
         },
         field: 'cd_endereco',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       nome: {
         type: Sequelize.STRING,

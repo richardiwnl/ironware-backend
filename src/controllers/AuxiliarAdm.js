@@ -17,6 +17,13 @@ class AuxiliarAdmController {
   async show(req, res) {
     try {
       const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({
+          errors: ['O ID é necessário para fazer essa requisição'],
+        });
+      }
+
       const auxiliar = await AuxiliarAdm.findByPk(id);
 
       if (!auxiliar) {

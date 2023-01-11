@@ -11,6 +11,14 @@ export default class Fornecedor extends Model {
           primaryKey: true,
           field: 'cd_fornecedor',
         },
+        id_endereco: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'tb_enderecos',
+            key: 'cd_endereco',
+          },
+          field: 'cd_endereco',
+        },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -20,6 +28,7 @@ export default class Fornecedor extends Model {
               msg: 'O nome precisa ter entre 3 e 255 caracteres',
             },
           },
+          field: 'nm_nome',
         },
         email: {
           type: Sequelize.STRING,
@@ -32,6 +41,7 @@ export default class Fornecedor extends Model {
               msg: 'E-mail inválido',
             },
           },
+          field: 'ds_email',
         },
         telefone: {
           type: Sequelize.STRING,
@@ -48,6 +58,7 @@ export default class Fornecedor extends Model {
               msg: 'O número de telefone deve entre 8 e 11 dígitos',
             },
           },
+          field: 'nu_fone',
         },
         cnpj: {
           type: Sequelize.STRING,
@@ -58,6 +69,7 @@ export default class Fornecedor extends Model {
               msg: 'O CNPJ deve ter 14 dígitos',
             },
           },
+          field: 'nu_cnpj',
         },
         created_at: {
           type: Sequelize.DATE,
@@ -76,7 +88,6 @@ export default class Fornecedor extends Model {
 
   static associate(models) {
     this.hasMany(models.Encomenda, { foreignKey: 'cd_fornecedor' });
-
-    this.belongsTo(models.Endereco);
+    this.belongsTo(models.Endereco, { foreignKey: 'cd_endereco' });
   }
 }
