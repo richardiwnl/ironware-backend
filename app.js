@@ -14,6 +14,7 @@ import Encomenda from './src/routes/Encomenda';
 import Compra from './src/routes/Compra';
 import Produto from './src/routes/Produto';
 import ProdutoCompra from './src/routes/ProdutoCompra';
+import ProdutoEncomenda from './src/routes/ProdutoEncomenda';
 
 import './src/database';
 
@@ -46,6 +47,7 @@ class App {
     this.app.use('/compras/', Compra);
     this.app.use('/produtos/', Produto);
     this.app.use('/produtocompra/', ProdutoCompra);
+    this.app.use('/produtoencomenda/', ProdutoEncomenda);
   }
 }
 

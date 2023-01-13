@@ -22,7 +22,7 @@ export default class ProdutoCompra extends Model {
           },
           field: 'cd_encomenda',
         },
-        qt_produto: {
+        quantidade: {
           type: Sequelize.INTEGER,
           defaultValue: 0,
           validate: {
@@ -31,6 +31,7 @@ export default class ProdutoCompra extends Model {
               msg: 'A quantidade deve ser maior ou igual a zero',
             },
           },
+          field: 'qt_produto',
         },
         created_at: {
           type: Sequelize.DATE,
