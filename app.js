@@ -11,6 +11,7 @@ import Endereco from './src/routes/Endereco';
 import AuxiliarAdm from './src/routes/AuxiliarAdm';
 import Fornecedor from './src/routes/Fornecedor';
 import Encomenda from './src/routes/Encomenda';
+import Compra from './src/routes/Compra';
 
 import './src/database';
 
@@ -40,6 +41,7 @@ class App {
     this.app.use('/auxiliares/', AuxiliarAdm);
     this.app.use('/fornecedores/', Fornecedor);
     this.app.use('/encomendas/', Encomenda);
+    this.app.use('/compras/', Compra);
   }
 }
 
