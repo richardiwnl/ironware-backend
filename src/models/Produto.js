@@ -17,15 +17,16 @@ export default class Produto extends Model {
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
+          unique: {
+            msg: 'Produto já existe'
+          },
           validate: {
             len: {
               args: [3, 64],
               msg: 'O nome deve ter entre 3 e 64 caracteres',
             },
-            isNumeric: {
-              msg: 'O nome não deve conter números',
-            },
           },
+          field: 'nm_nome',
         },
         marca: {
           type: Sequelize.STRING,
@@ -36,6 +37,7 @@ export default class Produto extends Model {
               msg: 'A marca deve ter entre 2 e 30 caracteres',
             },
           },
+          field: 'nm_marca',
         },
         quantidade: {
           type: Sequelize.INTEGER,
@@ -45,11 +47,31 @@ export default class Produto extends Model {
               args: [1],
               msg: 'A quantidade deve ser maior que 0',
             },
+            isNumeric: {
+              msg: 'Quantidade do produto inválida',
+            },
+            isInt: {
+              msg: 'A quantidade do produto deve ser um número inteiro',
+            },
           },
+          field: 'qt_quantidade',
         },
         valor: {
           type: Sequelize.DECIMAL(10, 2),
           defaultValue: 0,
+          validate: {
+            min: {
+              args: [1],
+              msg: 'O valor deve ser maior que R$ 0,00',
+            },
+            isNumeric: {
+              msg: 'Valor do produto inválido',
+            },
+            isDecimal: {
+              msg: 'O Valor do produto deve ser um número decimal',
+            },
+          },
+          field: 'vl_valor',
         },
         created_at: {
           type: Sequelize.DATE,
