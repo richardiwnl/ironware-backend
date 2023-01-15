@@ -1,9 +1,14 @@
+import Foto from '../models/Foto';
 import Produto from '../models/Produto';
 
 class ProdutoController {
   async index(req, res) {
     try {
-      const produtos = await Produto.findAll();
+      const produtos = await Produto.findAll({
+        include: {
+          model: Foto,
+        },
+      });
 
       return res.json({ produtos });
     } catch (err) {

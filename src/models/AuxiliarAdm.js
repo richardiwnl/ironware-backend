@@ -46,10 +46,10 @@ export default class AuxiliarAdm extends Model {
         },
         data_nasc: {
           type: Sequelize.DATEONLY,
-          defaultValue: Date.now(),
+          defaultValue: new Date(),
           validate: {
             customValidator(value) {
-              if (new Date(value) < new Date(1900) || new Date(value) >= Date.now()) {
+              if (new Date(value) < new Date(1900) || new Date(value) >= new Date()) {
                 throw new Error('Data inválida');
               }
             },

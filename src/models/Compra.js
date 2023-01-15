@@ -46,7 +46,6 @@ export default class Compra extends Model {
         },
         forma_pagamento: {
           type: Sequelize.ENUM('CARTÃO DE CRÉDITO', 'CARTÃO DE DÉBITO'),
-          defaultValue: '',
           field: 'ds_forma_pagamento',
           allowNull: false,
           validate: {

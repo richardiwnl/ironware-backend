@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { resolve } from 'path';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ import Compra from './src/routes/Compra';
 import Produto from './src/routes/Produto';
 import ProdutoCompra from './src/routes/ProdutoCompra';
 import ProdutoEncomenda from './src/routes/ProdutoEncomenda';
+import Foto from './src/routes/Foto';
 
 import './src/database';
 
@@ -33,6 +35,7 @@ class App {
     );
 
     this.app.use(express.json());
+    this.app.use(express.static(resolve(__dirname, 'uploads')));
   }
 
   routes() {
@@ -48,6 +51,7 @@ class App {
     this.app.use('/produtos/', Produto);
     this.app.use('/produtocompra/', ProdutoCompra);
     this.app.use('/produtoencomenda/', ProdutoEncomenda);
+    this.app.use('/fotos/', Foto);
   }
 }
 

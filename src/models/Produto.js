@@ -18,7 +18,7 @@ export default class Produto extends Model {
           type: Sequelize.STRING,
           defaultValue: '',
           unique: {
-            msg: 'Produto já existe'
+            msg: 'Produto já existe',
           },
           validate: {
             len: {
@@ -100,5 +100,7 @@ export default class Produto extends Model {
       otherKey: 'cd_encomenda',
       through: ProdutoEncomenda,
     });
+
+    this.hasMany(models.Foto, { foreignKey: 'cd_produto' });
   }
 }

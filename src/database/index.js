@@ -10,6 +10,7 @@ import ProdutoEncomenda from '../models/ProdutoEncomenda';
 import Encomenda from '../models/Encomenda';
 import AuxiliarAdm from '../models/AuxiliarAdm';
 import Fornecedor from '../models/Fornecedor';
+import Foto from '../models/Foto';
 
 const models = [
   Endereco,
@@ -21,9 +22,16 @@ const models = [
   AuxiliarAdm,
   Encomenda,
   ProdutoEncomenda,
+  Foto,
 ];
 
 const connection = new Sequelize(databaseConfig);
+
+const reset = async () => {
+  await connection.sync({ force: true });
+};
+
+// reset();
 
 models.forEach((model) => model.init(connection));
 models.forEach((model) => model.associate && model.associate(connection.models));

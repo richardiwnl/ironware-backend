@@ -37,7 +37,7 @@ export default class Encomenda extends Model {
         },
         valor_total: {
           type: Sequelize.DECIMAL(10, 2),
-          defaultValue: '',
+          defaultValue: 0,
           validate: {
             isDecimal: {
               msg: 'Valor inválido',
@@ -51,15 +51,15 @@ export default class Encomenda extends Model {
         },
         data_entrega: {
           type: Sequelize.DATE,
-          defaultValue: Date.now(),
+          defaultValue: new Date(),
           field: 'dt_entrega',
         },
         data_realizacao: {
           type: Sequelize.DATE,
-          defaultValue: Date.now(),
+          defaultValue: new Date(),
           validate: {
             customValidator(value) {
-              if (new Date(value) > Date.now()) {
+              if (new Date(value) > new Date()) {
                 throw new Error('Data inválida');
               }
             },
