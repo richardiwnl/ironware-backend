@@ -28,7 +28,9 @@ const models = [
 const connection = new Sequelize(databaseConfig);
 
 const reset = async () => {
-  await connection.sync({ force: true });
+  await connection.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true }).then(() => {
+    connection.sync({ force: true });
+  });
 };
 
 // reset();

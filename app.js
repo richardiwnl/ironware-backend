@@ -1,8 +1,22 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
+import cors from 'cors';
+import helmet from 'helmet';
 
 dotenv.config();
+
+const whitelist = ['http://localhost:3001'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(null, new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 import test from './src/routes/test';
 import Usuario from './src/routes/Usuario';
@@ -28,6 +42,12 @@ class App {
   }
 
   middlewares() {
+    this.app.use(cors(corsOptions));
+    this.app.use(
+      helmet({
+        crossOriginResourcePolicy: false,
+      })
+    );
     this.app.use(
       express.urlencoded({
         extended: true,
