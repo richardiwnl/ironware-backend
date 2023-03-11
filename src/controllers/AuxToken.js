@@ -23,7 +23,7 @@ class AuxTokenController {
       });
     }
 
-    if (!(await auxiliar).passwordIsValid(senha)) {
+    if (!(await auxiliar.passwordIsValid(senha))) {
       return res.status(401).json({
         errors: ['Senha inválida'],
       });
