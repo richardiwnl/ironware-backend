@@ -17,7 +17,7 @@ class UsuarioController {
 
   async show(req, res) {
     try {
-      const { id } = req.params;
+      const id = req.userId;
 
       if (!id) {
         return res.status(400).json({

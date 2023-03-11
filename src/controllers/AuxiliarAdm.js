@@ -16,7 +16,7 @@ class AuxiliarAdmController {
 
   async show(req, res) {
     try {
-      const { id } = req.params;
+      const id = req.userId;
 
       if (!id) {
         return res.status(400).json({
@@ -32,7 +32,7 @@ class AuxiliarAdmController {
         });
       }
 
-      return res.json({ auxiliar });
+      return res.json(auxiliar);
     } catch (err) {
       return res.status(400).json({
         errors: err.errors.map((error) => error.message),
