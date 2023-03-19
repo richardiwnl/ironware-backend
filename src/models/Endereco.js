@@ -103,6 +103,6 @@ export default class Endereco extends Model {
   static associate(models) {
     this.hasOne(models.Usuario, { foreignKey: 'cd_endereco' });
     this.hasOne(models.Fornecedor, { foreignKey: 'cd_endereco' });
-    this.hasOne(models.AuxiliarAdm, { foreignKey: 'cd_endereco' });
+    this.hasOne(models.Administrador, { foreignKey: 'cd_endereco' });
   }
 }

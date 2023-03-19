@@ -1,12 +1,12 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_auxiliares_administrativos', {
+    await queryInterface.createTable('tb_administradores', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        field: 'cd_auxiliar',
+        field: 'cd_administrador',
       },
       id_endereco: {
         type: Sequelize.INTEGER,
@@ -61,6 +61,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_auxiliares_administrativos');
+    await queryInterface.dropTable('tb_administradores');
   },
 };
