@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import AuxiliarAdm from '../models/AuxiliarAdm';
+import Administrador from '../models/Administrador';
 
 class AuxTokenController {
   async store(req, res) {
@@ -11,7 +11,7 @@ class AuxTokenController {
       });
     }
 
-    const auxiliar = await AuxiliarAdm.findOne({
+    const auxiliar = await Administrador.findOne({
       where: {
         email,
       },

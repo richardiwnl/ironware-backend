@@ -1,13 +1,14 @@
-import AuxiliarAdm from '../models/AuxiliarAdm';
+import Administrador from '../models/Administrador';
 
-class AuxiliarAdmController {
+class AdministradorController {
   async store(req, res) {
     try {
-      const auxiliar = await AuxiliarAdm.create(req.body);
+      const auxiliar = await Administrador.create(req.body);
       const { id, nome, email, telefone, cpf, data_nasc, hash_senha } = auxiliar;
 
       return res.json({ id, nome, email, telefone, cpf, data_nasc, hash_senha });
     } catch (err) {
+      console.log("ERRO", err);
       return res.status(400).json({
         errors: err.errors.map((error) => error.message),
       });
@@ -24,7 +25,7 @@ class AuxiliarAdmController {
         });
       }
 
-      const auxiliar = await AuxiliarAdm.findByPk(id);
+      const auxiliar = await Administrador.findByPk(id);
 
       if (!auxiliar) {
         return res.status(400).json({
@@ -50,7 +51,7 @@ class AuxiliarAdmController {
         });
       }
 
-      const auxiliar = await AuxiliarAdm.findByPk(id);
+      const auxiliar = await Administrador.findByPk(id);
 
       if (!auxiliar) {
         return res.status(400).json({
@@ -78,7 +79,7 @@ class AuxiliarAdmController {
         });
       }
 
-      const auxiliar = await AuxiliarAdm.findByPk(id);
+      const auxiliar = await Administrador.findByPk(id);
 
       if (!auxiliar) {
         return res.status(400).json({
@@ -97,4 +98,4 @@ class AuxiliarAdmController {
   }
 }
 
-export default new AuxiliarAdmController();
+export default new AdministradorController();

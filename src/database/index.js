@@ -6,11 +6,9 @@ import Compra from '../models/Compra';
 import Usuario from '../models/Usuario';
 import Produto from '../models/Produto';
 import ProdutoCompra from '../models/ProdutoCompra';
-import ProdutoEncomenda from '../models/ProdutoEncomenda';
-import Encomenda from '../models/Encomenda';
-import AuxiliarAdm from '../models/AuxiliarAdm';
-import Fornecedor from '../models/Fornecedor';
+import Administrador from '../models/Administrador';
 import Foto from '../models/Foto';
+import Categoria from '../models/Categoria';
 
 const models = [
   Endereco,
@@ -18,11 +16,9 @@ const models = [
   Compra,
   Produto,
   ProdutoCompra,
-  Fornecedor,
-  AuxiliarAdm,
-  Encomenda,
-  ProdutoEncomenda,
+  Administrador,
   Foto,
+  Categoria,
 ];
 
 const connection = new Sequelize(databaseConfig);

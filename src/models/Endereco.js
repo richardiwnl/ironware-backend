@@ -82,13 +82,15 @@ export default class Endereco extends Model {
           },
           field: 'nu_cep',
         },
-        created_at: {
+        dt_criado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_criado_em',
         },
-        updated_at: {
+        dt_atualizado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_atualizado_em',
         },
       },
       {
@@ -102,7 +104,6 @@ export default class Endereco extends Model {
 
   static associate(models) {
     this.hasOne(models.Usuario, { foreignKey: 'cd_endereco' });
-    this.hasOne(models.Fornecedor, { foreignKey: 'cd_endereco' });
     this.hasOne(models.Administrador, { foreignKey: 'cd_endereco' });
   }
 }

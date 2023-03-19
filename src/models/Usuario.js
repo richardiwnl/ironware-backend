@@ -102,13 +102,15 @@ export default class Usuario extends Model {
           defaultValue: '',
           field: 'ds_senha',
         },
-        created_at: {
+        dt_criado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_criado_em',
         },
-        updated_at: {
+        dt_atualizado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_atualizado_em',
         },
       },
       { sequelize, tableName: 'tb_usuarios' }

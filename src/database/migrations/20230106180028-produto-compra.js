@@ -27,10 +27,12 @@ module.exports = {
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        field: 'dt_criado_em',
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        field: 'dt_atualizado_em',
       },
     });
   },

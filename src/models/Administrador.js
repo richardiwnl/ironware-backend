@@ -99,16 +99,18 @@ export default class Administrador extends Model {
           defaultValue: '',
           field: 'ds_senha',
         },
-        created_at: {
+        dt_criado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_criado_em',
         },
-        updated_at: {
+        dt_atualizado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_atualizado_em',
         },
       },
-      { sequelize, tableName: 'tb_administrador' }
+      { sequelize, tableName: 'tb_administradores' }
     );
 
     this.addHook('beforeSave', async (user) => {
@@ -125,7 +127,6 @@ export default class Administrador extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Encomenda, { foreignKey: 'cd_administrador' });
     this.belongsTo(models.Endereco, { foreignKey: 'cd_endereco' });
   }
 }

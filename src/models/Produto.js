@@ -1,7 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
 import ProdutoCompra from './ProdutoCompra';
-import ProdutoEncomenda from './ProdutoEncomenda';
 
 export default class Produto extends Model {
   static init(sequelize) {
@@ -73,13 +72,15 @@ export default class Produto extends Model {
           },
           field: 'vl_valor',
         },
-        created_at: {
+        dt_criado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_criado_em',
         },
-        updated_at: {
+        dt_atualizado_em: {
           type: Sequelize.DATE,
           allowNull: false,
+          field: 'dt_atualizado_em',
         },
       },
       { sequelize, tableName: 'tb_produtos' }
@@ -95,11 +96,7 @@ export default class Produto extends Model {
       through: ProdutoCompra,
     });
 
-    this.belongsToMany(models.Encomenda, {
-      foreignKey: 'cd_produto',
-      otherKey: 'cd_encomenda',
-      through: ProdutoEncomenda,
-    });
+    this.belongsTo(models.Categoria, { foreignKey: 'cd_categoria' });
 
     this.hasMany(models.Foto, { foreignKey: 'cd_produto' });
   }

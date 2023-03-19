@@ -49,6 +49,16 @@ export default class Foto extends Model {
             return `${config.url}/images/${this.getDataValue('filename')}`;
           },
         },
+        dt_criado_em: {
+          type: Sequelize.DATE,
+          allowNull: false,
+          field: 'dt_criado_em',
+        },
+        dt_atualizado_em: {
+          type: Sequelize.DATE,
+          allowNull: false,
+          field: 'dt_atualizado_em',
+        },
       },
       { sequelize, tableName: 'tb_fotos' }
     );

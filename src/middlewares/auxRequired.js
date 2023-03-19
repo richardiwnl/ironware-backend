@@ -1,6 +1,6 @@
 import jwt, { JsonWebTokenError } from 'jsonwebtoken';
 
-import AuxiliarAdm from '../models/AuxiliarAdm';
+import Administrador from '../models/Administrador';
 
 // AVISO!!! Código de baixíssima qualidade a seguir:
 export default async function (req, res, next) {
@@ -22,7 +22,7 @@ export default async function (req, res, next) {
     const dados = jwt.verify(token, process.env.AUX_TOKEN_SECRET);
     const { id, email } = dados;
 
-    const auxiliar = await AuxiliarAdm.findOne({
+    const auxiliar = await Administrador.findOne({
       where: {
         id,
         email,
@@ -37,7 +37,7 @@ export default async function (req, res, next) {
 
     req.userId = id;
     req.userEmail = email;
-    req.user = AuxiliarAdm;
+    req.user = Administrador;
 
     next();
   } catch (err) {

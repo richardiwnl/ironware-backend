@@ -8,6 +8,15 @@ module.exports = {
         primaryKey: true,
         field: 'cd_produto',
       },
+      id_categoria: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'tb_categorias',
+          key: 'cd_categoria',
+        },
+        field: 'cd_categoria',
+      },
       nome: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -32,10 +41,12 @@ module.exports = {
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        field: 'dt_criado_em',
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
+        field: 'dt_atualizado_em',
       },
     });
   },
