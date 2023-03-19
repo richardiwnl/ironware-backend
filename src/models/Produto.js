@@ -13,6 +13,17 @@ export default class Produto extends Model {
           primaryKey: true,
           field: 'cd_produto',
         },
+        id_categoria: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'tb_categorias',
+            key: 'cd_categoria',
+          },
+          field: 'cd_categoria',
+          onDelete: 'SET NULL',
+          onUpdate: 'CASCADE',
+        },
         nome: {
           type: Sequelize.STRING,
           defaultValue: '',
@@ -26,17 +37,6 @@ export default class Produto extends Model {
             },
           },
           field: 'nm_nome',
-        },
-        marca: {
-          type: Sequelize.STRING,
-          defaultValue: '',
-          validate: {
-            len: {
-              args: [2, 30],
-              msg: 'A marca deve ter entre 2 e 30 caracteres',
-            },
-          },
-          field: 'nm_marca',
         },
         quantidade: {
           type: Sequelize.INTEGER,

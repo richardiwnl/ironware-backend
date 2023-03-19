@@ -10,6 +10,7 @@ module.exports = {
       nome: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         field: 'nm_categoria',
       },
       created_at: {

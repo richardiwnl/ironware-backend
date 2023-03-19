@@ -20,12 +20,13 @@ class ProdutoController {
 
   async store(req, res) {
     try {
-      let { nome, marca, quantidade, valor } = req.body;
+      let { nome, id_categoria, quantidade, valor } = req.body;
 
-      const produto = await Produto.create({ nome, marca, quantidade, valor });
+      const produto = await Produto.create({ nome, id_categoria, quantidade, valor });
 
       return res.json({ produto });
     } catch (err) {
+      console.log("ERROR", err);
       return res.status(400).json({
         errors: err.errors.map((error) => error.message),
       });

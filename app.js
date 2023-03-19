@@ -28,6 +28,7 @@ import Compra from './src/routes/Compra';
 import Produto from './src/routes/Produto';
 import ProdutoCompra from './src/routes/ProdutoCompra';
 import Foto from './src/routes/Foto';
+import Categoria from './src/routes/Categoria';
 
 import './src/database';
 
@@ -66,6 +67,7 @@ class App {
     this.app.use('/produtos/', Produto);
     this.app.use('/produtocompra/', ProdutoCompra);
     this.app.use('/fotos/', Foto);
+    this.app.use('/categoria/', Categoria);
   }
 }
 

@@ -23,11 +23,6 @@ module.exports = {
         field: 'nm_nome',
         unique: true,
       },
-      marca: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        field: 'nm_marca',
-      },
       quantidade: {
         type: Sequelize.INTEGER,
         allowNull: false,

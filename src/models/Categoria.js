@@ -14,6 +14,9 @@ export default class Categoria extends Model {
           type: Sequelize.STRING,
           allowNull: false,
           field: 'nm_categoria',
+          unique: {
+            msg: 'Categoria já existe'
+          },
           validate: {
             notEmpty: {
               msg: 'A categoria deve ser informada',

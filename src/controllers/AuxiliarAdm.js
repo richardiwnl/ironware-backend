@@ -8,7 +8,6 @@ class AdministradorController {
 
       return res.json({ id, nome, email, telefone, cpf, data_nasc, hash_senha });
     } catch (err) {
-      console.log("ERRO", err);
       return res.status(400).json({
         errors: err.errors.map((error) => error.message),
       });
