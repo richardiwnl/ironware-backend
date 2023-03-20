@@ -4,10 +4,17 @@ import Usuario from '../models/Usuario';
 class EnderecoController {
   async store(req, res) {
     try {
+      const usuario = await req.user.findByPk(req.userId);
+
+      if (usuario.id_endereco !== null) {
+        return res.status(400).json({
+          errors: ['Você já possui um endereço cadastrado']
+        })
+      }
+
       const endereco = await Endereco.create(req.body);
       const { logradouro, bairro, cidade, complemento, numero, cep } = endereco;
 
-      const usuario = await req.user.findByPk(req.userId);
 
       usuario.id_endereco = endereco.id;
 
