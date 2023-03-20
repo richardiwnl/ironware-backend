@@ -51,6 +51,30 @@ class FotoController {
       }
     });
   }
+
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({
+          errors: ['O ID é necessário para fazer essa requisição'],
+        });
+      }
+
+      await Foto.destroy({
+        where: {
+          id_produto: id,
+        },
+      });
+      return res.json({ status: 'Ok' });
+    } catch (err) {
+      console.log('ERRO', err);
+      return res.status(400).json({
+        errors: err.errors.map((error) => error.message),
+      });
+    }
+  }
 }
 
 export default new FotoController();

@@ -21,7 +21,7 @@ export default class Produto extends Model {
             key: 'cd_categoria',
           },
           field: 'cd_categoria',
-          onDelete: 'SET NULL',
+          onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
         },
         nome: {

@@ -1,13 +1,12 @@
 import Foto from '../models/Foto';
+import Categoria from '../models/Categoria';
 import Produto from '../models/Produto';
 
 class ProdutoController {
   async index(req, res) {
     try {
       const produtos = await Produto.findAll({
-        include: {
-          model: Foto,
-        },
+        include: [{ model: Foto }, { model: Categoria }],
       });
 
       return res.json({ produtos });
@@ -26,7 +25,7 @@ class ProdutoController {
 
       return res.json({ produto });
     } catch (err) {
-      console.log("ERROR", err);
+      console.log('ERROR', err);
       return res.status(400).json({
         errors: err.errors.map((error) => error.message),
       });
@@ -43,7 +42,9 @@ class ProdutoController {
         });
       }
 
-      const produto = await Produto.findByPk(id);
+      const produto = await Produto.findByPk(id, {
+        include: [{ model: Foto }, { model: Categoria }],
+      });
 
       if (!produto) {
         return res.status(400).json({
