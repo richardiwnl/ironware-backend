@@ -7,3 +7,4 @@ package-lock.json
 .prettierrc
 .editorconfig
 **sequelizeMeta.json
+**relatorios/
