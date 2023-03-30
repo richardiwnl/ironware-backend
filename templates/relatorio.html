@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+      }
+      .right {
+        text-align: right;
+      }
+      .width-50 {
+        width: 50%;
+      }
+      .mb-10 {
+        margin-bottom: 10px;
+      }
+      .container {
+        width: 730px;
+        margin: 5vh auto;
+        border: solid 2px rgb(245, 245, 245);
+        min-height: 800px;
+        padding: 15px;
+      }
+      .container .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .company-name {
+        color: rgb(0, 0, 0);
+        text-align: center;
+        margin-top: 70px;
+        font-size: 32px;
+        font-weight: 200;
+      }
+
+      .container .header {
+        margin-top: 10px;
+        color: rgb(0, 158, 250);
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .invoice-ref-row {
+        display: flex;
+        justify-content: space-between;
+      }
+      .invoice-address-title {
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: solid 2px rgb(0, 0, 0);
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 5px;
+      }
+      .invoice-address {
+        display: flex;
+        justify-content: space-between;
+      }
+      .product-title {
+        background-color: rgb(245, 245, 245);
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+        padding: 12px 0 7px 0;
+      }
+      .product-item {
+        display: flex;
+        margin-bottom: 25px;
+      }
+      .product-item .product-item-picture {
+        width: 20%;
+        display: flex;
+        align-items: center;
+      }
+      .product-item .product-item-info {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .product-item .product-item-price {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        padding-right: 20px;
+      }
+      .product-item .product-item-info .product-item-info-name {
+        font-weight: bold;
+        font-size: 16px;
+        color: rgb(33, 30, 30);
+      }
+      .product-item .product-item-info .product-item-info-options {
+        color: rgb(128, 128, 128);
+        font-size: 13px;
+      }
+      .table-order-price {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .table-order-price td {
+        padding: 4px 15px;
+      }
+      .footer {
+        text-align: center;
+        width: 100%;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="{{ image }}" alt="Logo" />
+        <div class="company-name">RELATÓRIO DE ESTOQUE</div>
+      </div>
+      <div style="height: 20px"></div>
+      <div style="height: 20px; text-align: right"><b>Data</b>: {{ date }}</div>
+      <div style="height: 10px"></div>
+      <div style="height: 20px"></div>
+      <div class="product-title">PRODUTOS</div>
+      <div style="height: 20px"></div>
+      <div class="products">
+        {{#each products}}
+        <div class="product-item">
+          <div class="product-item-picture">
+            <img src="{{ this.Fotos.[0].url }}" width="80" height="80" alt="product-picture" />
+          </div>
+          <div class="product-item-info">
+            <div class="product-item-info-name">{{ this.nome }}</div>
+            <div style="height: 8px"></div>
+            <div class="product-item-info-options">
+              <span style="padding-right: 50px">Categoria: <b>{{ this.Categorium.nome }}</b></span>
+            </div>
+          </div>
+          <div class="product-item-price">
+            <div>Quantidade: {{ this.quantidade }}</div>
+            <div style="height: 8px"></div>
+            <div><b>R$ {{ this.valor }}</b></div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <div style="margin-top: 20px; border-bottom: solid 2px #f5f5f5"></div>
+      <div style="height: 20px"></div>
+      <table border="1" class="table-order-price">
+        <tbody>
+          <tr>
+            <td><b>PRODUTOS EM ESTOQUE</b></td>
+            <td class="right"><b>{{quantidadeEstoque}}</b></td>
+          </tr>
+          <tr>
+            <td><b>FRETE APROXIMADO</b></td>
+            <td class="right"><b>{{valorFrete}}</b></td>
+          </tr>
+          <tr>
+            <td style="padding-top: 10px"><b>VALOR EM ESTOQUE</b></td>
+            <td style="padding-top: 10px" class="right"><b>{{ valorEstoque }}</b></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="height: 30px"></div>
+      <div class="footer">&copy; 2023 Ironware.</div>
+    </div>
+  </body>
+</html>

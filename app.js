@@ -29,6 +29,7 @@ import Produto from './src/routes/Produto';
 import ProdutoCompra from './src/routes/ProdutoCompra';
 import Foto from './src/routes/Foto';
 import Categoria from './src/routes/Categoria';
+import Relatorio from './src/routes/Relatorio';
 
 import './src/database';
 
@@ -53,7 +54,7 @@ class App {
     );
 
     this.app.use(express.json());
-    this.app.use(express.static(resolve(__dirname, 'uploads')));
+    this.app.use(express.static(resolve(__dirname , 'uploads')));
   }
 
   routes() {
@@ -68,6 +69,7 @@ class App {
     this.app.use('/produtocompra/', ProdutoCompra);
     this.app.use('/fotos/', Foto);
     this.app.use('/categoria/', Categoria);
+    this.app.use('/relatorio/', Relatorio);
   }
 }
 
